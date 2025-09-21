@@ -1,18 +1,34 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../utils/AuthContext";
+import axios from "axios";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login form submitted", { email, password });
+    try {
+      const res = await axios.post("/api/users/login", { email, password });
+      login(res.data);
+      setMessage(res.data.message);
+      setTimeout(() => {
+        navigate("/account");
+      }, 2000);
+    } catch (err) {
+      setMessage(err.response.data.error);
+    }
   };
 
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
         <h2>Login</h2>
+        {message && <p>{message}</p>}
         <input
           type="email"
           placeholder="Email address"
