@@ -8,7 +8,7 @@ function CategoryPage() {
 
   // Fetch categories from backend
   useEffect(() => {
-    axios.get("http://localhost:1337/api/categories")
+    axios.get("/api/categories")
       .then(res => setCategories(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -17,7 +17,7 @@ function CategoryPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:1337/api/categories", {
+      const res = await axios.post("/api/categories", {
         name,
         description,
       });

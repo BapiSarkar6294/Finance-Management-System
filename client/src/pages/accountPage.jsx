@@ -9,7 +9,7 @@ function AccountPage() {
 
   // Fetch accounts from backend
   useEffect(() => {
-    axios.get("http://localhost:1337/api/accounts")
+    axios.get("/api/accounts")
       .then(res => setAccounts(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -18,7 +18,7 @@ function AccountPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:1337/api/accounts", {
+      const res = await axios.post("/api/accounts", {
         name,
         balance,
         type,

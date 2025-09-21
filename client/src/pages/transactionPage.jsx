@@ -10,7 +10,7 @@ function TransactionPage() {
 
   // Fetch transactions
   useEffect(() => {
-    axios.get("http://localhost:1337/api/transactions")
+    axios.get("/api/transactions")
       .then(res => setTransactions(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -19,7 +19,7 @@ function TransactionPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:1337/api/transactions", {
+      const res = await axios.post("/api/transactions", {
         title,
         amount,
         type,

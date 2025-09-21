@@ -9,7 +9,7 @@ function BudgetPage() {
 
   // Fetch budgets from backend
   useEffect(() => {
-    axios.get("http://localhost:1337/api/budgets")
+    axios.get("/api/budgets")
       .then(res => setBudgets(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -18,7 +18,7 @@ function BudgetPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:1337/api/budgets", {
+      const res = await axios.post("/api/budgets", {
         name,
         limit,
         period,
